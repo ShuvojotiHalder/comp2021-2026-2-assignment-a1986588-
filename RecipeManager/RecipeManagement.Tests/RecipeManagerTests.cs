@@ -58,7 +58,9 @@ public sealed class RecipeManagerTests
     [Fact]
 
     public void RemoveRecipe_Exception() {
-        var initialRecipes = new List<Recipe>{new Recipe {Id = 1, Title = "Chicken"}};
+        var initialRecipes = new List<Recipe>{new Recipe
+            {Id = 1, Title = "Chicken"}
+        };
         var manager = new RecipeManager(initialRecipes);
 
         Assert.Throws<NotImplementedException>(() => manager.RemoveRecipe(2));
@@ -113,6 +115,22 @@ public sealed class RecipeManagerTests
 
         Assert.Equal(3, shoppingList.Count);
         Assert.NotNull(manager.GetShoppingList());
+    }
+
+    [Fact] // test 06
+    public void ShoppingListClear_outputEmpty() {
+        var recipe = new Recipe {
+            
+            Id = 1, Title = "Chicken", Ingredients = new List<string>{"Soup", "Salsa", "Corn"}
+            
+            };
+        
+        var manager = new RecipeManager(new List<Recipe>{recipe});
+        manager.AddIngredientsToShoppingList(1);
+        manager.ClearShoppingList();
+        var shoppingList = manager.GetShoppingList();
+
+        Assert.Empty(shoppingList);
     }
 
     // [Fact]
