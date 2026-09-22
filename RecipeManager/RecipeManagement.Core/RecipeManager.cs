@@ -44,8 +44,11 @@ public sealed class RecipeManager : IRecipeManager
          return true;   
     }
 
-    public Recipe? FindRecipe(int recipeId) =>
-        throw new NotImplementedException("Part A: implement FindRecipe.");
+    public Recipe? FindRecipe(int recipeId) {
+        if(_recipes.TryGetValue(recipeId, out Recipe recipe));
+            return recipe;
+        return null;
+    }
 
     public bool RemoveRecipe(int recipeId) =>
         throw new NotImplementedException("Part A: implement RemoveRecipe.");
