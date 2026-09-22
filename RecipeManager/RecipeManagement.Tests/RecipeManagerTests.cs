@@ -94,6 +94,27 @@ public sealed class RecipeManagerTests
         Assert.Equal(0, recipeID);
     }
 
+    // test 05
+    [Fact]
+    public void ShoppingList_ReadOnly(){
+        var recipe = new Recipe {
+            Id = 1,
+            Title = "Chopstick Noodles",
+            Ingredients = {"Noodles", "Ramen", "Eggs"}
+        };
+
+        var manager = new RecipeManager(new List<Recipe> {recipe});
+        
+        Assert.Empty(manager.GetShoppingList());
+
+        // inserting items in the shopping list
+        manager.AddIngredientsToShoppingList(1);
+        var shoppingList = manager.GetShoppingList();
+
+        Assert.Equal(3, shoppingList.Count);
+        Assert.NotNull(manager.GetShoppingList());
+    }
+
     // [Fact]
     // public void Constructor_BuildsRecipeDictionary()
     // {
