@@ -11,11 +11,20 @@ namespace RecipeManagement.Core;
 public sealed class RecipeManager : IRecipeManager
 {
     // TODO Part A: add your private collection fields here.
+    private Dictionary<int, Recipe> _recipes;
 
     public RecipeManager(IEnumerable<Recipe> recipes)
     {
         // TODO Part A: validate recipes and build Dictionary<int, Recipe>.
-        _ = recipes;
+        if(recipes == null)
+            throw new ArgumentException(nameof(recipes));
+        _recipes = new Dictionary<int, Recipe>();
+
+        foreach(Recipe recipe in recipes) {
+            if(_recipes.ContainsKey(recipe.Id))
+                throw new ArgumentException($"{recipe.Id} is already present.");
+            _recipes.Add(recipe.Id, recipe);
+        }
     }
 
     public int RecipeCount => 0;
