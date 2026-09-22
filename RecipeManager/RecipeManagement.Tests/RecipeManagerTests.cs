@@ -54,6 +54,25 @@ public sealed class RecipeManagerTests
         Assert.Null(result);
     }
 
+    // test 03
+    [Fact]
+
+    public void RemoveRecipe_Exception() {
+        var initialRecipes = new List<Recipe>{new Recipe {Id = 1, Title = "Chicken"}};
+        var manager = new RecipeManager(initialRecipes);
+
+        Assert.Throws<NotImplementedException>(() => manager.RemoveRecipe(2));
+    }
+
+    [Fact]
+    public void RemoveRecipe_TrueValue(){
+        var initialRecipes = new List<Recipe>{new Recipe {Id = 1, Title = "Chicken"}};
+        var manager = new RecipeManager(initialRecipes);
+
+        var result = manager.RemoveRecipe(1);
+        Assert.True(result);
+    }
+
     // [Fact]
     // public void Constructor_BuildsRecipeDictionary()
     // {
