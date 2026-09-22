@@ -27,7 +27,7 @@ public sealed class RecipeManager : IRecipeManager
         }
     }
 
-    public int RecipeCount => 0;
+    public int RecipeCount => _recipes.Count;
     public int ShoppingItemCount => 0;
     public int CookingPlanCount => 0;
     public int PendingInstructionCount => 0;
