@@ -45,7 +45,7 @@ public sealed class RecipeManager : IRecipeManager
     }
 
     public Recipe? FindRecipe(int recipeId) {
-        if(_recipes.TryGetValue(recipeId, out Recipe recipe));
+        if(_recipes.TryGetValue(recipeId, out Recipe? recipe));
             return recipe;
         return null;
     }

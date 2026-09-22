@@ -31,6 +31,29 @@ public sealed class RecipeManagerTests
         Assert.Throws<ArgumentException>(() => manager.AddRecipe(duplicateRecipe));
     }
 
+    [Fact] // test02
+    public void FindRecipe_TrueValue(){
+        var initialRecipes = new List<Recipe>{new Recipe {Id = 1, Title = "Chicken"}};
+        var manager = new RecipeManager(initialRecipes);
+
+        var result = manager.FindRecipe(1);
+
+        Assert.NotNull(result);
+        Assert.Equal(1, result.Id);
+        Assert.Equal("Chicken", result.Title);
+    }
+
+    [Fact]
+
+    public void FindRecipe_NullValue(){
+        var initialRecipes = new List<Recipe>{new Recipe {Id = 1, Title = "Chicken"}};
+        var manager = new RecipeManager(initialRecipes);
+
+        var result = manager.FindRecipe(2);
+
+        Assert.Null(result);
+    }
+
     // [Fact]
     // public void Constructor_BuildsRecipeDictionary()
     // {
