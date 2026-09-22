@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Recipe;
 
 namespace RecipeManagement.Core;
 
@@ -12,6 +13,7 @@ public sealed class RecipeManager : IRecipeManager
 {
     // TODO Part A: add your private collection fields here.
     private Dictionary<int, Recipe> _recipes;
+    private List<string> _shoppingList;
 
     public RecipeManager(IEnumerable<Recipe> recipes)
     {
@@ -28,7 +30,7 @@ public sealed class RecipeManager : IRecipeManager
     }
 
     public int RecipeCount => _recipes.Count;
-    public int ShoppingItemCount => 0;
+    public int ShoppingItemCount => _shoppingList.Count;
     public int CookingPlanCount => 0;
     public int PendingInstructionCount => 0;
     public int RemovedRecipeCount => 0;
@@ -56,8 +58,16 @@ public sealed class RecipeManager : IRecipeManager
         return _recipes.Remove(recipeId);
     }
 
-    public int AddIngredientsToShoppingList(int recipeId) =>
-        throw new NotImplementedException("Part A: implement AddIngredientsToShoppingList.");
+    public int AddIngredientsToShoppingList(int recipeId) {
+        Recipe? recipe = FindRecipe(recipeId);
+
+        if(recipe == null)
+            return 0;
+        foreach(string ingredient in recipe.Ingredients) {
+            _shoppingList.Add(ingredient);
+        }
+        return recipe.Ingredients.Count;
+    }
 
     public IReadOnlyList<string> GetShoppingList() =>
         throw new NotImplementedException("Part A: implement GetShoppingList.");
