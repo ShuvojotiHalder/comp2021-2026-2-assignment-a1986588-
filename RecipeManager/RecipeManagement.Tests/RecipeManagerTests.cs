@@ -73,6 +73,27 @@ public sealed class RecipeManagerTests
         Assert.True(result);
     }
 
+    // test 04
+    [Fact]
+    public void AddIngredientsSL_TrueVal() {
+        var recipe = new Recipe {Id = 1, Title = "Pasta", Ingredients = new List<string> {"Pasta", "Tomato", "Chicken", "Mayonnaise"}};
+
+        var manager = new RecipeManager(new List<Recipe> {recipe});
+
+        int recipeID = manager.AddIngredientsToShoppingList(1);
+
+        Assert.Equal(4, recipeID);
+    }
+
+    [Fact]
+    public void AddIngredientSL_FalseVal(){
+        var manager = new RecipeManager(new List<Recipe>());
+
+        int recipeID = manager.AddIngredientsToShoppingList(11);
+
+        Assert.Equal(0, recipeID);
+    }
+
     // [Fact]
     // public void Constructor_BuildsRecipeDictionary()
     // {

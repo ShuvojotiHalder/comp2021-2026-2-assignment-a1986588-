@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Recipe;
+
 
 namespace RecipeManagement.Core;
 
@@ -20,7 +20,10 @@ public sealed class RecipeManager : IRecipeManager
         // TODO Part A: validate recipes and build Dictionary<int, Recipe>.
         if(recipes == null)
             throw new ArgumentException(nameof(recipes));
+
+        // Initialzing the values    
         _recipes = new Dictionary<int, Recipe>();
+        _shoppingList = new List<string>();
 
         foreach(Recipe recipe in recipes) {
             if(_recipes.ContainsKey(recipe.Id))
