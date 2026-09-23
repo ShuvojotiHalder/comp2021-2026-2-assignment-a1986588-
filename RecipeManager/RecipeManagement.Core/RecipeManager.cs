@@ -109,8 +109,14 @@ public sealed class RecipeManager : IRecipeManager
         return true;
     }
 
-    public bool RestoreLastRemovedRecipe() =>
-        throw new NotImplementedException("Part A: implement RestoreLastRemovedRecipe.");
+    public bool RestoreLastRemovedRecipe() {
+        if(_removedRecipe.Count == 0) return false;
+        int recipeId = _removedRecipe.Peek();
+
+        _removedRecipe.Pop();
+        _cookingPlan.AddLast(recipeId);
+        return true;
+    }
 
     public int? PeekLastRemovedRecipe() =>
         throw new NotImplementedException("Part A: implement PeekLastRemovedRecipe.");
