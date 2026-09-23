@@ -88,11 +88,26 @@ public sealed class RecipeManager : IRecipeManager
         _shoppingList.Clear();
     }
 
-    public bool AddRecipeToCookingPlan(int recipeId) =>
-        throw new NotImplementedException("Part A: implement AddRecipeToCookingPlan.");
+    public bool AddRecipeToCookingPlan(int recipeId) {
+        if(!_recipes.ContainsKey(recipeId))
+            return false;
+        if(_cookingPlan.ContainsKey(recipeId)) return false;
 
-    public bool RemoveRecipeFromCookingPlan(int recipeId) =>
-        throw new NotImplementedException("Part A: implement RemoveRecipeFromCookingPlan.");
+        _cookingPlan.AddLast(recipeId);
+        return true;
+    }
+
+    public bool RemoveRecipeFromCookingPlan(int recipeId) {
+        LinkedListNode<int>? node = _cookingPlan.Find(recipeId);
+
+        if(node == null)
+            return false;
+
+        _cookingPlan.Remove(recipeId);
+        _removedRecipe.Push(recipeId); // pushing into the stack.
+
+        return true;
+    }
 
     public bool RestoreLastRemovedRecipe() =>
         throw new NotImplementedException("Part A: implement RestoreLastRemovedRecipe.");
