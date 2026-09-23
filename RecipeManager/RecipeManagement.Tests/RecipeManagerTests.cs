@@ -133,6 +133,54 @@ public sealed class RecipeManagerTests
         Assert.Empty(shoppingList);
     }
 
+    // test 07 
+    [Fact]
+
+    public void AddRecipeCookingPlan_TrueVal(){
+        var recipe = new List<Recipe>{
+            new Recipe {
+                Id = 1,
+                Title = "MasalaSoup",
+                Ingredients = new List<string>("Soup", "Chicken", "MaggieMasala")
+            }, 
+            new Recipe {
+                Id = 2,
+                Title = "Soyachunk",
+                Ingredients = new List<string>("MaggieMasala", "Wings", "Soyabeans")
+            }
+        };
+
+        var manager = new RecipeManager(recipe);
+
+        Assert.True(manager.AddRecipeToCookingPlan(1));
+        Assert.True(manager.AddRecipeToCookingPlan(2));
+
+        Assert.Equal(2, manager.CookingPlanCount);
+    }
+
+    [Fact]
+    public void AddRecipeToCookingPlan_FalseVal(){
+        var recipe = new List<Recipe>{
+            new Recipe {
+                Id = 1,
+                Title = "MasalaSoup",
+                Ingredients = new List<string>("Soup", "Chicken", "MaggieMasala")
+            }, 
+            new Recipe {
+                Id = 2,
+                Title = "Soyachunk",
+                Ingredients = new List<string>("MaggieMasala", "Wings", "Soyabeans")
+            }
+        };
+
+        var manager = new RecipeManager(recipe);
+
+        Assert.True(manager.AddRecipeToCookingPlan(1));
+        Assert.False(manager.AddRecipeToCookingPlan(1));
+
+        Assert.Equal(1, manager.CookingPlanCount);
+    }
+
     // [Fact]
     // public void Constructor_BuildsRecipeDictionary()
     // {
