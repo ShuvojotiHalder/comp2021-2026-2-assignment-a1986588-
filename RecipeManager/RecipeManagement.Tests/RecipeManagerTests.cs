@@ -212,6 +212,40 @@ public sealed class RecipeManagerTests
         Assert.Equal(0, manager.CookingPlanCount);
     }
 
+    // test 09
+    [Fact]
+    public void RestoreRemoveRecipe_TrueVal(){
+        var recipe = new Recipe {
+                Id = 1,
+                Title = "MasalaSoup",
+                Ingredients = new List<string>{"Soup", "Chicken", "MaggieMasala"}
+            };
+
+        var manager = new RecipeManager(new List<Recipe>{recipe});
+        manager.AddRecipeToCookingPlan(1);
+
+        var cookingPlan = manager.RemoveRecipeFromCookingPlan(1);
+
+        Assert.Equal(1, manager.RemovedRecipeCount);
+    }
+
+    // test 10
+    [Fact]
+    public void PeekRemoveRecipe_TrueVal(){
+        var recipe = new Recipe {
+                Id = 1,
+                Title = "MasalaSoup",
+                Ingredients = new List<string>{"Soup", "Chicken", "MaggieMasala"}
+            };
+
+        var manager = new RecipeManager(new List<Recipe>{recipe});
+        manager.AddRecipeToCookingPlan(1);
+
+        var cookingPlan = manager.RemoveRecipeFromCookingPlan(1);
+
+        Assert.Equal(1, manager.PeekLastRemovedRecipe());
+    }
+
     // [Fact]
     // public void Constructor_BuildsRecipeDictionary()
     // {
