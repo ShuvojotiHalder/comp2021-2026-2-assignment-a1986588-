@@ -15,6 +15,8 @@ public sealed class RecipeManager : IRecipeManager
     private Dictionary<int, Recipe> _recipes;
     private List<string> _shoppingList;
     private LinkedList<int> _cookingPlan;
+    private Stack<int> _removedRecipe;
+
     
 
     public RecipeManager(IEnumerable<Recipe> recipes)
@@ -28,6 +30,7 @@ public sealed class RecipeManager : IRecipeManager
         _recipes = new Dictionary<int, Recipe>();
         _shoppingList = new List<string>();
         _cookingPlan = new LinkedList<int>();
+        _removedRecipe = new Stack<int>();
 
 
         foreach(Recipe recipe in recipes) {
@@ -41,7 +44,7 @@ public sealed class RecipeManager : IRecipeManager
     public int ShoppingItemCount => _shoppingList.Count;
     public int CookingPlanCount => _cookingPlan.Count;
     public int PendingInstructionCount => 0;
-    public int RemovedRecipeCount => 0;
+    public int RemovedRecipeCount => _removedRecipe.Count;
 
     public bool AddRecipe(Recipe recipe) {
         if(recipe == null)
