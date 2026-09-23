@@ -14,6 +14,8 @@ public sealed class RecipeManager : IRecipeManager
     // TODO Part A: add your private collection fields here.
     private Dictionary<int, Recipe> _recipes;
     private List<string> _shoppingList;
+    private LinkedList<int> _cookingPlan;
+    
 
     public RecipeManager(IEnumerable<Recipe> recipes)
     {
@@ -21,9 +23,12 @@ public sealed class RecipeManager : IRecipeManager
         if(recipes == null)
             throw new ArgumentException(nameof(recipes));
 
+
         // Initialzing the values    
         _recipes = new Dictionary<int, Recipe>();
         _shoppingList = new List<string>();
+        _cookingPlan = new LinkedList<int>();
+
 
         foreach(Recipe recipe in recipes) {
             if(_recipes.ContainsKey(recipe.Id))
@@ -34,7 +39,7 @@ public sealed class RecipeManager : IRecipeManager
 
     public int RecipeCount => _recipes.Count;
     public int ShoppingItemCount => _shoppingList.Count;
-    public int CookingPlanCount => 0;
+    public int CookingPlanCount => _cookingPlan.Count;
     public int PendingInstructionCount => 0;
     public int RemovedRecipeCount => 0;
 
