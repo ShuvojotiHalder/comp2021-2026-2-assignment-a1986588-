@@ -16,7 +16,7 @@ public sealed class RecipeManager : IRecipeManager
     private List<string> _shoppingList;
     private LinkedList<int> _cookingPlan;
     private Stack<int> _removedRecipe;
-    private Queue<string> _instrucions;
+    private Queue<string> _instructions;
     
 
     public RecipeManager(IEnumerable<Recipe> recipes)
@@ -43,7 +43,7 @@ public sealed class RecipeManager : IRecipeManager
     public int RecipeCount => _recipes.Count;
     public int ShoppingItemCount => _shoppingList.Count;
     public int CookingPlanCount => _cookingPlan.Count;
-    public int PendingInstructionCount => _instrucions.Count;
+    public int PendingInstructionCount => _instructions.Count;
     public int RemovedRecipeCount => _removedRecipe.Count;
 
     public bool AddRecipe(Recipe recipe) {
@@ -91,7 +91,7 @@ public sealed class RecipeManager : IRecipeManager
     public bool AddRecipeToCookingPlan(int recipeId) {
         if(!_recipes.ContainsKey(recipeId))
             return false;
-        if(_cookingPlan.ContainsKey(recipeId)) return false;
+        if(_cookingPlan.Contains(recipeId)) return false;
 
         _cookingPlan.AddLast(recipeId);
         return true;

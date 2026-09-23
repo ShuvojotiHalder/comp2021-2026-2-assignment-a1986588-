@@ -141,12 +141,12 @@ public sealed class RecipeManagerTests
             new Recipe {
                 Id = 1,
                 Title = "MasalaSoup",
-                Ingredients = new List<string>("Soup", "Chicken", "MaggieMasala")
+                Ingredients = new List<string>{"Soup", "Chicken", "MaggieMasala"}
             }, 
             new Recipe {
                 Id = 2,
                 Title = "Soyachunk",
-                Ingredients = new List<string>("MaggieMasala", "Wings", "Soyabeans")
+                Ingredients = new List<string>{"MaggieMasala", "Wings", "Soyabeans"}
             }
         };
 
@@ -164,12 +164,12 @@ public sealed class RecipeManagerTests
             new Recipe {
                 Id = 1,
                 Title = "MasalaSoup",
-                Ingredients = new List<string>("Soup", "Chicken", "MaggieMasala")
+                Ingredients = new List<string>{"Soup", "Chicken", "MaggieMasala"}
             }, 
             new Recipe {
                 Id = 2,
                 Title = "Soyachunk",
-                Ingredients = new List<string>("MaggieMasala", "Wings", "Soyabeans")
+                Ingredients = new List<string>{"MaggieMasala", "Wings", "Soyabeans"}
             }
         };
 
@@ -179,6 +179,37 @@ public sealed class RecipeManagerTests
         Assert.False(manager.AddRecipeToCookingPlan(1));
 
         Assert.Equal(1, manager.CookingPlanCount);
+    }
+
+    // test 08
+    [Fact]
+    public void RemoveRecipeFromCookingPlan_FalseVal(){
+        var recipe = new Recipe {
+                Id = 1,
+                Title = "MasalaSoup",
+                Ingredients = new List<string>{"Soup", "Chicken", "MaggieMasala"}
+            };
+
+        var manager = new RecipeManager(new List<Recipe>{recipe});
+
+        var cookingPlan = manager.RemoveRecipeFromCookingPlan(2);
+        Assert.False(cookingPlan);
+    }
+
+    [Fact]
+    public void RemoveRecipeFromCookingPlan_TrueVal(){
+        var recipe = new Recipe {
+                Id = 1,
+                Title = "MasalaSoup",
+                Ingredients = new List<string>{"Soup", "Chicken", "MaggieMasala"}
+            };
+
+        var manager = new RecipeManager(new List<Recipe>{recipe});
+        manager.AddRecipeToCookingPlan(1);
+
+        var cookingPlan = manager.RemoveRecipeFromCookingPlan(1);
+        Assert.True(cookingPlan);
+        Assert.Equal(0, manager.CookingPlanCount);
     }
 
     // [Fact]
