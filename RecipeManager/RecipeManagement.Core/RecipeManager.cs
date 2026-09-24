@@ -17,6 +17,7 @@ public sealed class RecipeManager : IRecipeManager
     private LinkedList<int> _cookingPlan;
     private Stack<int> _removedRecipe;
     private Queue<string> _instructions;
+    private HashSet<int> _savedRecipes;
     
 
     public RecipeManager(IEnumerable<Recipe> recipes)
@@ -32,6 +33,7 @@ public sealed class RecipeManager : IRecipeManager
         _cookingPlan = new LinkedList<int>();
         _removedRecipe = new Stack<int>();
         _instructions = new Queue<string>();
+        _savedRecipes = new Hashset<int>();
 
         foreach(Recipe recipe in recipes) {
             if(_recipes.ContainsKey(recipe.Id))
@@ -168,11 +170,15 @@ public sealed class RecipeManager : IRecipeManager
 
     }
 
-    public IReadOnlyList<Recipe> GetHighestProteinRecipes(int count) =>
-        throw new NotImplementedException("Part B: implement GetHighestProteinRecipes.");
+    public IReadOnlyList<Recipe> GetHighestProteinRecipes(int count) {
+        if(count <= 0)
+            return new List<Recipe>().AsReadOnly();
+        return _recipes.Values.OrderByDescending(recipe => recipe.Nutrition?.ProteinG ?? 0.0).Take(count).ToList().AsReadOnly();
+    }
 
-    public bool AddSavedRecipe(int recipeId) =>
-        throw new NotImplementedException("Part B: implement AddSavedRecipe.");
+    public bool AddSavedRecipe(int recipeId) {
+        
+    }
 
     public bool RemoveSavedRecipe(int recipeId) =>
         throw new NotImplementedException("Part B: implement RemoveSavedRecipe.");
