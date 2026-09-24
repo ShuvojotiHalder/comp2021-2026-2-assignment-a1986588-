@@ -274,6 +274,15 @@ public sealed class RecipeManagerTests
 
         Assert.False(manager.RestoreLastRemovedRecipe());
     }
+
+    // test 13
+    [Fact]
+    public void emptyQueue_instruction(){
+        var manager = new RecipeManager(Array.Empty<Recipe>());
+
+        Assert.Null(manager.PeekNextInstruction());
+        Assert.Null(manager.CompleteNextInstruction());
+    }
     // [Fact]
     // public void Constructor_BuildsRecipeDictionary()
     // {
