@@ -135,7 +135,7 @@ public sealed class RecipeManager : IRecipeManager
         _instructions.Clear();
 
         foreach(var instruction in recipe.Instructions){
-            _instructions.Enqueue(instrution);
+            _instructions.Enqueue(instruction);
         }
         return true;
     }

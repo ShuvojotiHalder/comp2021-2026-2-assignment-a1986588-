@@ -246,6 +246,22 @@ public sealed class RecipeManagerTests
         Assert.Equal(1, manager.PeekLastRemovedRecipe());
     }
 
+    // test 11
+    [Fact]
+    public void startCooking_instructionTrue(){
+        var recipe = new Recipe {
+            Id = 101,
+            Title = "EggsToast",
+            Ingredients = new List<string>{"Eggs", "Bread", "Butter", "Jam", "Salsa", "Sriracha Sauce"},
+            Instructions = new List<string>{"Take 4 Eggs", "Boil them", "Toast 3 Breads", "Spread with butter", "Toast until black layer is visible over the toast"}
+        };
+
+        var manager = new RecipeManager(new List<Recipe>{recipe});
+
+        Assert.True(manager.StartCooking(101));
+        Assert.Equal(5, manager.PendingInstructionCount);
+    }
+
     // [Fact]
     // public void Constructor_BuildsRecipeDictionary()
     // {
