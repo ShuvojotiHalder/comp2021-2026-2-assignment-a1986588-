@@ -159,8 +159,14 @@ public sealed class RecipeManager : IRecipeManager
         return _recipes.Values.Where(recipe => recipe.Title.Contains(searchText, StringComparison.OrdinalIgnoreCase)).ToList().AsReadOnly();
     }
 
-    public IReadOnlyList<Recipe> SearchByIngredient(string searchText) =>
-        throw new NotImplementedException("Part B: implement SearchByIngredient.");
+    public IReadOnlyList<Recipe> SearchByIngredient(string searchText) {
+        if(string.IsNullOrWhiteSpace(searchText))  
+            return new List<Recipe>().AsReadOnly();
+        return _recipes.Values.Where(recipe => recipe.Ingredients.Any(
+            ingredient => ingredient.Contains(searchText, StringComparison.OrdinalIgnoreCase)
+        )).ToList().AsReadOnly();
+
+    }
 
     public IReadOnlyList<Recipe> GetHighestProteinRecipes(int count) =>
         throw new NotImplementedException("Part B: implement GetHighestProteinRecipes.");
