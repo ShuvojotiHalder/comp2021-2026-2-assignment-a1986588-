@@ -128,8 +128,17 @@ public sealed class RecipeManager : IRecipeManager
         return _cookingPlan.ToList().AsReadOnly();
     }
 
-    public bool StartCooking(int recipeId) =>
-        throw new NotImplementedException("Part A: implement StartCooking.");
+    public bool StartCooking(int recipeId) {
+        Recipe? recipe = FindRecipe(recipeId);
+        if(recipe == null) return false;
+
+        _instructions.Clear();
+
+        foreach(var instruction in recipe.Instructions){
+            _instructions.Enqueue(instrution);
+        }
+        return true;
+    }
 
     public string? PeekNextInstruction() =>
         throw new NotImplementedException("Part A: implement PeekNextInstruction.");
