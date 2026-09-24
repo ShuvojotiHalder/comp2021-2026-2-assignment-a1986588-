@@ -260,9 +260,20 @@ public sealed class RecipeManagerTests
 
         Assert.True(manager.StartCooking(101));
         Assert.Equal(5, manager.PendingInstructionCount);
+
+        // interaction between 2 methods
         Assert.Equal("Take 4 Eggs", manager.PeekNextInstruction());
     }
 
+    // task 12
+    [Fact]
+    public void emptyStack_removedRecipe(){
+        var manager = new RecipeManager(Array.Empty<Recipe>());
+
+        Assert.Null(manager.PeekLastRemovedRecipe());
+
+        Assert.False(manager.RestoreLastRemovedRecipe());
+    }
     // [Fact]
     // public void Constructor_BuildsRecipeDictionary()
     // {
