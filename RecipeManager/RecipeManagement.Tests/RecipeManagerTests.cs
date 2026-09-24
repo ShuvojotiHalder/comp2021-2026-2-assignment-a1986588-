@@ -260,6 +260,7 @@ public sealed class RecipeManagerTests
 
         Assert.True(manager.StartCooking(101));
         Assert.Equal(5, manager.PendingInstructionCount);
+        Assert.Equal("Take 4 Eggs", manager.PeekNextInstruction());
     }
 
     // [Fact]
