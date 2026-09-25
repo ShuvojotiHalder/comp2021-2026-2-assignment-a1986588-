@@ -33,8 +33,9 @@ public sealed class RecipeManager : IRecipeManager
         _cookingPlan = new LinkedList<int>();
         _removedRecipe = new Stack<int>();
         _instructions = new Queue<string>();
-        _savedRecipes = new Hashset<int>();
+        _savedRecipes = new HashSet<int>();
 
+        // Validating recipeIDs
         foreach(Recipe recipe in recipes) {
             if(_recipes.ContainsKey(recipe.Id))
                 throw new ArgumentException($"{recipe.Id} is already present.");
