@@ -159,7 +159,7 @@ public sealed class RecipeManagerTests
     }
 
     [Fact]
-    public void AddRecipeToCookingPlan_FalseVal(){
+    public void AddRecipeToCookingPlan_FalseVal_Duplicate(){
         var recipe = new List<Recipe>{
             new Recipe {
                 Id = 1,
